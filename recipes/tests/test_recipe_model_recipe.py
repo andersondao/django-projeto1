@@ -15,14 +15,13 @@ class RecipeModelTest(RecipeTestBase):
             author=self.make_author(username='newuser'),
             title='Recipe Title',
             description='Recipe Description',
-            slug=None,
+            slug='recipe-slug-for-no-defaults',
             preparation_time=10,
             preparation_time_unit='Minutos',
             servings=5,
             servings_unit='Porções',
             preparation_steps='Recipe Preparation Steps',
         )
-        recipe.slug = f'slug-{recipe.pk}'
         recipe.full_clean()
         recipe.save()
         return recipe
