@@ -21,7 +21,7 @@ class RecipeHomeViewsTest(RecipeTestBase):
         response = self.client.get(reverse('recipes:home'))
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
-    @skip('WIP')
+    # @skip('WIP')  # utilizado para pular o test Work in Progress
     def test_recipe_home_template_shows_no_recipes_found_if_no_rescipes(self):
 
         response = self.client.get(reverse('recipes:home'))
