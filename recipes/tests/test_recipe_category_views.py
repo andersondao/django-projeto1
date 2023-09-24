@@ -1,3 +1,6 @@
+from unittest import skip
+from unittest.mock import patch
+
 from django.urls import resolve, reverse
 
 from recipes import views
@@ -37,5 +40,22 @@ class RecipeCategoryViewsTest(RecipeTestBase):
         response = self.client.get(
             reverse('recipes:recipe', kwargs={'id': recipe.category.id})
         )
-        pass
         self.assertEqual(response.status_code, 404)
+
+    @skip('WIP')
+    def test_recipe_category_is_paginated(self):
+
+        for i in range(8):
+            self.make_recipe(title=f'Titulo{i}')
+
+        with patch('recipes.views.PER_PAGE', new=3):
+            response = self.client.get(reverse('recipes:category', args=(1,)))
+
+            recipes = response.context['recipes']
+            paginator = recipes.paginator
+
+            pass
+            self.assertEqual(paginator.num_pages, 3)
+            self.assertEqual(len(paginator.get_page(1)), 3)
+            self.assertEqual(len(paginator.get_page(2)), 3)
+            self.assertEqual(len(paginator.get_page(3)), 2)
