@@ -18,6 +18,9 @@ def home(request):
     ).order_by("-id")
 
     messages.error(request, 'Teste de mensagem')
+    messages.success(request, 'Teste de mensagem')
+    messages.debug(request, 'Teste de mensagem')
+    messages.warning(request, 'Teste de mensagem')
 
     page_obj, pagination_range = make_pagination(request, recipes, PER_PAGE)
 
