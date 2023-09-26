@@ -66,6 +66,7 @@ class RecipeHomeViewsTest(RecipeTestBase):
             recipes = response.context['recipes']
             paginator = recipes.paginator
 
+            pass
             self.assertEqual(paginator.num_pages, 3)
             self.assertEqual(len(paginator.get_page(1)), 3)
             self.assertEqual(len(paginator.get_page(2)), 3)

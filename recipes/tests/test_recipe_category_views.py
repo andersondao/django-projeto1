@@ -13,6 +13,7 @@ class RecipeCategoryViewsTest(RecipeTestBase):
     def test_recipe_category_view_function_is_correct(self):
         view = resolve(reverse('recipes:category',
                        kwargs={'category_id': 1000}))
+
         self.assertIs(view.func, views.category)
 
     def test_recipe_category_view_returns_404_if_no_recipes_found(self):
@@ -41,21 +42,3 @@ class RecipeCategoryViewsTest(RecipeTestBase):
             reverse('recipes:recipe', kwargs={'id': recipe.category.id})
         )
         self.assertEqual(response.status_code, 404)
-
-    @skip('WIP')
-    def test_recipe_category_is_paginated(self):
-
-        for i in range(8):
-            self.make_recipe(title=f'Titulo{i}')
-
-        with patch('recipes.views.PER_PAGE', new=3):
-            response = self.client.get(reverse('recipes:category', args=(1,)))
-
-            recipes = response.context['recipes']
-            paginator = recipes.paginator
-
-            pass
-            self.assertEqual(paginator.num_pages, 3)
-            self.assertEqual(len(paginator.get_page(1)), 3)
-            self.assertEqual(len(paginator.get_page(2)), 3)
-            self.assertEqual(len(paginator.get_page(3)), 2)
