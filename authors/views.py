@@ -5,6 +5,8 @@ from django.urls import reverse
 
 from .forms import RegisterForm
 
+from .forms import LoginForm, RegisterForm
+
 
 def register_view(request):
     register_form_data = request.session.get('register_form_data', None)
