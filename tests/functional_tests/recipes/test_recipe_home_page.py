@@ -13,7 +13,6 @@ class RecipeHomePageFunctionalTest(RecipeBaseFunctionalTest):
     def test_recipe_home_page_without_recipes_not_found_message(self):
         self.browser.get(self.live_server_url)
         body = self.browser.find_element(By.TAG_NAME, 'body')
-        self.sleep(5)
         self.assertIn('No recipes found here 😢', body.text)
 
     @patch('recipes.views.PER_PAGE', new=2)
@@ -38,7 +37,6 @@ class RecipeHomePageFunctionalTest(RecipeBaseFunctionalTest):
         # para encontrar a receita o título desejado
         search_input.send_keys(title_needed)
         search_input.send_keys(Keys.ENTER)
-        self.sleep(5)
         # O usuário vê o que estava procurando na página
         self.assertIn(
             title_needed,
@@ -64,5 +62,3 @@ class RecipeHomePageFunctionalTest(RecipeBaseFunctionalTest):
             len(self.browser.find_elements(By.CLASS_NAME, 'recipe')),
             2
         )
-
-        self.sleep(5)
